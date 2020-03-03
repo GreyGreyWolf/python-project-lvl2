@@ -20,7 +20,6 @@ before_install:
     - ./cc-test-reporter before-build
 
 script:
-  - make check
   - make test
   - make lint
 

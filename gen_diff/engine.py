@@ -1,7 +1,7 @@
 import json
-
-
-status = {'added or change': ' + ', 'removed': ' - ', 'not chenged': '   '}
+f1 ={"host": "hexlet.io", "timeout": 50, "proxy": "123.234.53.22"}
+f2 = {"timeout": 20, "verbose": 'true', "host": "hexlet.io"}
+status = {'any': '+', 'removed': '-', 'unchanged': ' '}
 
 
 def parser(to_file):
@@ -10,22 +10,37 @@ def parser(to_file):
 
 
 def differ(f1, f2):
-    new_dict = {}
-    for key, value in f1.items():
-        if key in f2 and f1[key] == f2[key]:
-            new_dict.update(
-                {status['not chenged'] + key: f1[key]})  # Not changed
-        elif key not in f2:
-            new_dict.update({status['removed'] + key: f1[key]})  # Removed
-        elif key in f2 and f1[key] != f2[key]:
-            new_dict.update({status['removed'] + key: f1[key]})
-            new_dict.update(
-                {status['added or change'] + key: f2[key]})  # Changed
-    for key, value in f2.items():
-        if key not in f1:
-            new_dict.update(
-                {status['added or change'] + key: f2[key]})  # Added
-    return new_dict
+    x = f1.items()
+    y = f2.items()
+    result = list()
+    for elem in x & y:
+        result.extend(make_choice(elem, f1[elem], f2[elem]))
+    for elem in x - y:
+        result.append(select_removed(elem, f1[elem]))
+    for elem in y - x:
+        result.append(select_added(elem, f2[elem]))
+    return result
+
+
+def make_choice(elem, f1, f2):
+    d = {}
+    if f1 == f2:
+        d = (assign_status(status['unchanged'], elem, f1))
+    elif f1 != f2 and elem not in f2:
+       d = (assign_status(status['removed'], elem, f1), assign_status(status[any], elem, f2))
+    return d
+
+
+def select_removed(elem, f1):
+    return assign_status(status['removed'], elem, f1)
+
+
+def select_added(elem, f2):
+    return assign_status(status['any'], elem, f2)
+
+
+def assign_status(status, key, value):
+    return (status, key), value
 
 
 def engine_diff(f1, f2):
@@ -33,4 +48,4 @@ def engine_diff(f1, f2):
     file2 = parser(f2)
     diff = differ(file1, file2)
     diff = json.dumps(diff, indent=2)
-    return diff.replace('\"', '')
+    return diff
