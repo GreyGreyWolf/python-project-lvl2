@@ -3,5 +3,5 @@
 - timeout: 50
 + timeout: 20
 - proxy: 123.234.53.22
-+ verbose: True
++ verbose: true
 }
