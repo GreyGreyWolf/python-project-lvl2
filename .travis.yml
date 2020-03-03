@@ -1,6 +1,6 @@
 env:
   global:
-    - CC_TEST_REPORTER_ID= мой айдишник
+    - CC_TEST_REPORTER_ID=c873bbf16049e315723b61df52eb208d1a13be9c341675724995b17365ea836a
 
 language: python
 python: 3.7.3
