@@ -13,6 +13,7 @@ def differ(f1, f2):
     result = list()
     for elem in x & y:
         result.extend(make_choice(elem, f1[elem], f2[elem]))
+        result.sort()
     for elem in x - y:
         result.append(select_removed(elem, f1[elem]))
     for elem in y - x:
