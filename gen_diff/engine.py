@@ -26,7 +26,7 @@ def make_choice(elem, f1, f2):
     if f1 == f2:
         new_dict = (assign_status(status['unchanged'], elem, f1), )
     elif f1 != f2:
-        new_dict = (assign_status(status['removed'], elem, f1), 
+        new_dict = (assign_status(status['removed'], elem, f1),
                     assign_status(status['any'], elem, f2))
     return new_dict
 
