@@ -56,5 +56,5 @@ def engine_diff(f1, f2):
     file2 = parser(f2)
     diff = differ(file1, file2)
     diff = convert(diff)
-    diff = json.dumps(diff, indent=1, separators=(" ", ": "))
+    diff = json.dumps(diff, indent=1, separators=("", ": "))
     return diff.replace('\"', '')
