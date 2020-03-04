@@ -1,6 +1,4 @@
 import json
-f1 ={"host": "hexlet.io", "timeout": 50, "proxy": "123.234.53.22"}
-f2 = {"timeout": 20, "verbose": 'true', "host": "hexlet.io"}
 status = {'any': '+', 'removed': '-', 'unchanged': ' '}
 
 
@@ -50,26 +48,12 @@ def convert(data):
         s_string = ' ' + s_tuple[0] + ' ' + s_tuple[1]
         result_dict.update(dict([(s_string, i[1])]))
     return result_dict
-    
+
+
 def engine_diff(f1, f2):
     file1 = parser(f1)
     file2 = parser(f2)
     diff = differ(file1, file2)
     diff = convert(diff)
-    diff = json.dumps(diff, indent=1, separators=(" ", ":"))
-    return diff
-
-#op = differ(f1, f2)
-#print(len(op))
-#print(op[0])
-#for i in op:
-    #a = i[0]
-    #b = a[0] + ' ' + a[1]
-    #print(a[0])
-    #print(a[1])
-    #print(b)
-    #print(type(b))
-#    print(i[0])
-#   print(i[1])
-#p = convert(op)
-#print(p)
+    diff = json.dumps(diff, indent=1, separators=(" ", ": "))
+    return diff.replace('\"', '')
