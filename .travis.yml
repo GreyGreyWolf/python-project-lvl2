@@ -19,7 +19,7 @@ before_script:
   - ./cc-test-reporter before-build
 
 script:
-  - make test
+  - make pytest
   - make lint
 
 after_script:
