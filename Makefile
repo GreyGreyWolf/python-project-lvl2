@@ -6,3 +6,18 @@ lint:
 	
 test:
 	python3 -m poetry run pytest --cov --cov-report xml tests/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+.PHONY : help lint install test
