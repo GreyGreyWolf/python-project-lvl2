@@ -1,10 +1,8 @@
 import json
+from gen_diff.parsers import parser
+
+
 status = {'any': '+', 'removed': '-', 'unchanged': ' '}
-
-
-def parser(to_file):
-    data = json.load(open(to_file))
-    return data
 
 
 def differ(f1, f2):
