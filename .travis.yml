@@ -6,8 +6,7 @@ language: python
 python:
   - "3.7"
 
-install:
-  - make install
+install: make
 
 before_install:
   - pip install poetry
