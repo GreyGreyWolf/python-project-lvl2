@@ -7,17 +7,4 @@ lint:
 test:
 	
 	poetry run pytest --cov=gendiff tests/ --cov-report xml
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-.PHONY : help lint install test
+
