@@ -3,11 +3,11 @@ from gen_diff.const import SAVED, ADD, REMOVED, TO, FROM, CHILD
 
 
 SIGN = {
-    SAVED: ' ', 
-    REMOVED: '-', 
-    ADD: '+', 
-    CHILD: ' ', 
-    FROM: '-', 
+    SAVED: ' ',
+    REMOVED: '-',
+    ADD: '+',
+    CHILD: ' ',
+    FROM: '-',
     TO: '+'
     }
 

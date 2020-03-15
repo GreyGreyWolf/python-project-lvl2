@@ -20,7 +20,7 @@ parser.add_argument(
       default=0, help='set format of output')
 args = parser.parse_args()
 diff = engine.engine_diff(
-    args.first_file, 
+    args.first_file,
     args.second_file,
     turn(args.format)
     )
