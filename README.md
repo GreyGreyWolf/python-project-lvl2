@@ -9,3 +9,4 @@
 <a href="https://asciinema.org/a/MTQQhnsz3bvA95cFYR41UGBXv" target="_blank"><img src="https://asciinema.org/a/MTQQhnsz3bvA95cFYR41UGBXv.svg" /></a>
 
 # Сравнение плоских файлов (YAML)
+<a href="https://asciinema.org/a/32JefhsnWRtFtKesxLuIoifhf" target="_blank"><img src="https://asciinema.org/a/32JefhsnWRtFtKesxLuIoifhf.svg" /></a>
