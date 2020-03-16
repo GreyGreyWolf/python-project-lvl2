@@ -33,3 +33,7 @@ def test_answer():
         './tests/fixtures/complex_before.json',
         './tests/fixtures/complex_after.json',
         to_text.make_format)
+    assert reader('tests/fixtures/json_result.json') == engine.engine_diff(
+        './tests/fixtures/before.json',
+        './tests/fixtures/after.json',
+        to_json.make_format)
