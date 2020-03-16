@@ -10,3 +10,6 @@
 
 # Сравнение плоских файлов (YAML)
 <a href="https://asciinema.org/a/32JefhsnWRtFtKesxLuIoifhf" target="_blank"><img src="https://asciinema.org/a/32JefhsnWRtFtKesxLuIoifhf.svg" /></a>
+
+# Рекурсивное сравнение
+<a href="https://asciinema.org/a/APDjsFFywcGvVt2pDRnnghEhw" target="_blank"><img src="https://asciinema.org/a/APDjsFFywcGvVt2pDRnnghEhw.svg" /></a>
