@@ -1,6 +1,6 @@
 import argparse
 from gen_diff import engine
-from gen_diff.formatting import to_str
+from gen_diff.formatters import to_str, to_text, to_json
 
 
 def turn(arg):
