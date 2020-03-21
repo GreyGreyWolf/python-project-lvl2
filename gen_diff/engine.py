@@ -1,50 +1,48 @@
-from gen_diff.parsers import parser
+from gen_diff import parsers
 from gen_diff.const import SAVED, ADD, REMOVED, TO, FROM, CHILD
+from gen_diff.cli import init_argparser
 
 
-def is_children(f1, f2):
-    return isinstance(f1, dict) and isinstance(f2, dict) and f1 != f2
+def gendiff():
+    parser = init_argparser()
+    args = parser.parse_args()
+    diff = get_diff(args.first_file, args.second_file)
+    print(args.format(diff))
 
 
-def differ(f1, f2):
-    x = f1.keys()
-    y = f2.keys()
+def finding_difference(file1, file2):
+    x = file1.keys()
+    y = file2.keys()
     result = list()
     for elem in x & y:
-        result.extend(make_choice(elem, f1[elem], f2[elem]))
+        result.extend(make_choice(elem, file1[elem], file2[elem]))
     for elem in x - y:
-        result.append(select_removed(elem, f1[elem]))
+        result.append(make_pair(REMOVED, elem, file1[elem]))
     for elem in y - x:
-        result.append(select_added(elem, f2[elem]))
+        result.append(make_pair(ADD, elem, file2[elem]))
     return result
 
 
-def make_choice(elem, f1, f2):
+def make_choice(elem, file1, file2):
     new_dict = {}
-    if f1 == f2:
-        new_dict = (assign_status(SAVED, elem, f1), )
-    elif is_children(f1, f2):
-        new_dict = (assign_status(CHILD, elem, differ(f1, f2)), )
-    elif not is_children(f1, f2):
-        new_dict = (assign_status(FROM, elem, f1),
-                    assign_status(TO, elem, f2))
+    if file1 == file2:
+        new_dict = (make_pair(SAVED, elem, file1), )
+    elif (isinstance(file1, dict) and isinstance(
+         file2, dict) and file1 != file2):
+        new_dict = (make_pair(CHILD, elem, finding_difference(file1, file2)), )
+    elif not (isinstance(file1, dict) and isinstance(
+         file2, dict) and file1 != file2):
+        new_dict = (make_pair(FROM, elem, file1),
+                    make_pair(TO, elem, file2))
     return new_dict
 
 
-def select_removed(elem, f1):
-    return assign_status(REMOVED, elem, f1)
-
-
-def select_added(elem, f2):
-    return assign_status(ADD, elem, f2)
-
-
-def assign_status(status, key, value):
+def make_pair(status, key, value):
     return (status, key), value
 
 
-def engine_diff(f1, f2, vizual):
-    file1 = parser(f1)
-    file2 = parser(f2)
-    diff = vizual(differ(file1, file2))
+def get_diff(file1, file2):
+    parsed_file1 = parsers.parser(file1)
+    parsed_file2 = parsers.parser(file2)
+    diff = finding_difference(parsed_file1, parsed_file2)
     return diff

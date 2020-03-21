@@ -12,33 +12,33 @@ SIGN = {
     }
 
 
-def sort_diff(i):
-    (status, key), value = i
+def sort_diff(data):
+    (status, key), value = data
     return key
 
 
-def to_string(i):
-    str_diff = extract_value = ''
-    ((status, key), value) = i
+def to_string(data):
+    str_diff = string_value = ''
+    ((status, key), value) = data
     sign = SIGN[status]
-    extract_key = key
+    string_key = key
     if status == CHILD or isinstance(value, dict):
-        extract_value = indent(make_format(value, 1), ' ')
+        string_value = indent(format(value, 1), ' ')
     else:
-        extract_value = value
-    str_diff += '{} {}: {}\n'.format(sign, extract_key, extract_value)
+        string_value = value
+    str_diff += '{} {}: {}\n'.format(sign, string_key, string_value)
     return str_diff
 
 
-def make_format(diff, end=0):
+def format(diff, end=0):
     str_diff = ''
     if isinstance(diff, list):
         diff.sort(key=sort_diff)
-        for i in diff:
-            str_diff += to_string(i)
+        for elem in diff:
+            str_diff += to_string(elem)
     else:
-        for i in diff:
-            str_diff += '   {}: {}\n'.format(i, diff[i])
+        for elem in diff:
+            str_diff += '   {}: {}\n'.format(elem, diff[elem])
     str_diff = str_diff.join(['{\n', '}'])
     if end == 0:
         str_diff += '\n'
