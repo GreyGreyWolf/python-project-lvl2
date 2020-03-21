@@ -1,1 +1,1 @@
-[[["changed", "timeout"], 50], [["to", "timeout"], 20], [["no change", "host"], "hexlet.io"], [["removed", "proxy"], "123.234.53.22"], [["added", "verbose"], true]]
+[[["no change", "host"], "hexlet.io"], [["changed", "timeout"], 50], [["to", "timeout"], 20], [["removed", "proxy"], "123.234.53.22"], [["added", "verbose"], true]]
