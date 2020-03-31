@@ -1,13 +1,6 @@
 from gen_diff import parser
 from gen_diff.cli import init_argparser
-
-
-SAVED = 'no change'
-REMOVED = 'removed'
-ADD = 'added'
-CHILD = 'child'
-FROM = 'changed'
-TO = 'to'
+from gen_diff.status import SAVED, REMOVED, ADD, CHILD, FROM, TO
 
 
 def gendiff():
@@ -33,10 +26,12 @@ def get_modified(file1, file2):
 def compare_childs(elem, file1, file2):
     changed = {}
     if file1 == file2:
-        elem = (make_pair(SAVED, elem, file1), )
-    elif (isinstance(file1, dict) and isinstance(file2, dict)):
+        changed = (make_pair(SAVED, elem, file1), )
+    elif (isinstance(file1, dict) and isinstance(
+         file2, dict) and file1 != file2):
         changed = (make_pair(CHILD, elem, get_modified(file1, file2)), )
-    else:
+    elif not (isinstance(file1, dict) and isinstance(
+         file2, dict) and file1 != file2):
         changed = (make_pair(FROM, elem, file1),
                     make_pair(TO, elem, file2))
     return changed

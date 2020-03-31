@@ -1,0 +1,6 @@
+SAVED = 'no change'
+REMOVED = 'removed'
+ADD = 'added'
+CHILD = 'child'
+FROM = 'changed'
+TO = 'to'

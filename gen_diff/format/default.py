@@ -1,5 +1,5 @@
 from textwrap import indent
-from gen_diff.engine import SAVED, ADD, REMOVED, TO, FROM, CHILD
+from gen_diff.status import SAVED, REMOVED, ADD, CHILD, FROM, TO
 
 
 SIGN = {

@@ -1,18 +1,19 @@
 from gen_diff import engine
 from gen_diff.format.default import sort_diff
+from gen_diff.status import SAVED, REMOVED, ADD, CHILD, FROM, TO
 
 
 def to_string(data):
     string1 = ''
     (status, key), value = data
-    if status == engine.REMOVED:
+    if status == REMOVED:
         string1 = '.\n'
-    elif status == engine.FROM:
+    elif status == FROM:
         string1 = ". From '{}' to ".format(value)
-    elif status == engine.TO:
+    elif status == TO:
         string = "'{}'.\n".format(value)
         return string
-    elif status == engine.ADD:
+    elif status == ADD:
         string1 = " with value: '{}'.\n".format(value)
     string2 = "Property '{}' was {}{}".format(key, status, string1)
     return string2
@@ -20,9 +21,9 @@ def to_string(data):
 
 def select(data):
     (status, key), value = data
-    if status == engine.ADD and type(value) is dict:
+    if status == ADD and type(value) is dict:
         data = engine.make_pair(status, key, 'complex value')
-    elif status == engine.SAVED:
+    elif status == SAVED:
         return ''
     return to_string(data)
 
@@ -32,7 +33,7 @@ def format(diff):
     diff.sort(key=sort_diff)
     for  elem in diff:
         (status, key), value = elem
-        if status == engine.CHILD:
+        if status == CHILD:
             str_diff += format(deepen(key, value))
         else:
             str_diff += select(elem)
