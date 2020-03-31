@@ -1,6 +1,6 @@
 from gen_diff import engine
 from gen_diff.format.default import sort_diff
-from gen_diff.const import SAVED, ADD, REMOVED, TO, FROM, CHILD
+from gen_diff.engine import SAVED, ADD, REMOVED, TO, FROM, CHILD
 
 
 def to_string(data):

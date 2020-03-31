@@ -2,7 +2,7 @@ import pytest
 import yaml
 import json
 from gen_diff import engine
-from gen_diff.parsers import parser
+from gen_diff.parser import parser
 from gen_diff import format
 
 
