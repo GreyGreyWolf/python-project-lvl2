@@ -1,5 +1,5 @@
 from textwrap import indent
-from gen_diff.engine import SAVED, ADD, REMOVED, TO, FROM, CHILD
+from gen_diff import engine
 
 
 SIGN = {
@@ -22,7 +22,7 @@ def to_string(data):
     ((status, key), value) = data
     sign = SIGN[status]
     string_key = key
-    if status == CHILD or isinstance(value, dict):
+    if status == engine.CHILD or isinstance(value, dict):
         string_value = indent(format(value, 1), ' ')
     else:
         string_value = value

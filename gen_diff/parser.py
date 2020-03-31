@@ -1,11 +1,19 @@
+import os
 import json
 import yaml
 
 
-def parser(file_path):
-    format = file_path[file_path.rfind('.'):]
-    if format == '.json':
-        data = json.load(open(file_path))
-    elif format == '.yml':
-        data = yaml.safe_load(open(file_path))
+def get_path(path):
+    path = os.path.expanduser(path)
+    path = os.path.abspath(os.path.normpath(path))
+    return path
+
+
+def get_data_from(file):
+    path = get_path(file)
+    _, ext = os.path.splitext(file)
+    if ext in {'.json', 'jsn'}:
+        data = json.load(open(path))
+    elif ext in {'.yml', '.yaml'}:
+        data = yaml.safe_load(open(path))
     return data

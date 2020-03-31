@@ -17,7 +17,7 @@ def gendiff():
     print(args.format(diff))
 
 
-def difference(file1, file2):
+def get_modified(file1, file2):
     x = file1.keys()
     y = file2.keys()
     result = list()
@@ -31,17 +31,15 @@ def difference(file1, file2):
 
 
 def compare_childs(elem, file1, file2):
-    new_tuple = {}
+    changed = {}
     if file1 == file2:
         elem = (make_pair(SAVED, elem, file1), )
-    elif (isinstance(file1, dict) and isinstance(
-         file2, dict) and file1 != file2):
-        new_tuple = (make_pair(CHILD, elem, difference(file1, file2)), )
-    elif not (isinstance(file1, dict) and isinstance(
-         file2, dict) and file1 != file2):
-        new_tuple = (make_pair(FROM, elem, file1),
+    elif (isinstance(file1, dict) and isinstance(file2, dict)):
+        changed = (make_pair(CHILD, elem, get_modified(file1, file2)), )
+    else:
+        changed = (make_pair(FROM, elem, file1),
                     make_pair(TO, elem, file2))
-    return new_tuple
+    return changed
 
 
 def make_pair(status, key, value):
@@ -49,7 +47,7 @@ def make_pair(status, key, value):
 
 
 def get_diff(file1, file2):
-    parsed_file1 = parser.parser(file1)
-    parsed_file2 = parser.parser(file2)
-    diff = difference(parsed_file1, parsed_file2)
+    parsed_file1 = parser.get_data_from(file1)
+    parsed_file2 = parser.get_data_from(file2)
+    diff = get_modified(parsed_file1, parsed_file2)
     return diff
